@@ -20,8 +20,11 @@ class MainScreenModel(BaseScreenModel):
             # users with their display names
             for contact_chat in contact_chat_list:
                 try:
-                    contact_chat['user'] = self.base.contacts[contact_chat['raw_string_jid']]['display_name'] + \
-                                           f" <{contact_chat['user']}> "
+                    bah = self.base.contacts[contact_chat['raw_string_jid']]['display_name']
+                    if bah is not None:
+                        contact_chat['user'] = bah +  f" <{contact_chat['user']}> "
+                    else:
+                        contact_chat['user'] = "Empty something"
 
                 except KeyError:
                     print(f"Contact {contact_chat['raw_string_jid']} does not exist")
